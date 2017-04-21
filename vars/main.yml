@@ -1,0 +1,14 @@
+---
+__jenkins_repo_url: http://pkg.jenkins-ci.org/redhat/jenkins.repo
+__jenkins_repo_key_url: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+__jenkins_pkg_url: http://pkg.jenkins-ci.org/
+centos_jenkins_pkg_url: https://pkg.jenkins.io/redhat
+#jenkins_init_file: /etc/default/jenkins
+jenkins_init_file: /etc/sysconfig/jenkins
+jenkins_http_port_param: HTTP_PORT
+#jenkins_java_options_env_var: JAVA_ARGS
+jenkins_java_options_env_var: JENKINS_JAVA_OPTIONS
+download_url: http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-x64.tar.gz
+download_folder: /opt
+java_name: "{{download_folder}}/jdk1.8.0_05"
+java_archive: "{{download_folder}}/jdk-8u5-linux-x64.tar.gz"
