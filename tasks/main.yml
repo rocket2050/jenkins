@@ -54,12 +54,12 @@
   check_mode: no
 
 
-#- name: Remove Jenkins security init scripts after first startup.
-#  file:
-#    path: "{{ jenkins_home }}/init.groovy.d/created-seed-job.groovy"
-#    state: absent
+- name: Remove Jenkins security init scripts after first startup.
+  file:
+    path: "{{ jenkins_home }}/init.groovy.d/created-seed-job.groovy"
+    state: absent
 
-# Update Jenkins and install configured plugins.
+ Update Jenkins and install configured plugins.
 - include: plugins.yml
 
 - template:
