@@ -1,21 +1,14 @@
 import jenkins.model.*
 
 
-def jobName = "newSeedJob"
-
-//def git_url = System.getenv('SEEDJOB_GIT')
-//def svn_url = System.getenv('SEEDJOB_SVN')
-
-//def git_url = "https://github.com/tyagianita/Ansible-roles.git"
-
-//def scm = '''<scm class="hudson.scm.NullSCM"/>'''
+def jobName = "seedJob"
 
   scm = """\
   <scm class="hudson.plugins.git.GitSCM" plugin="git@3.2.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url><git url></url>
+        <url>https://github.com/OpsTree/jenkins-jobdsl.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -27,40 +20,25 @@ def jobName = "newSeedJob"
     <submoduleCfg class="list"/>
     <extensions/>
   </scm>
+
   """
 
 def configXml = """\
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
-  <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <hudson.model.ParametersDefinitionProperty>
-      <parameterDefinitions>
-        <hudson.model.StringParameterDefinition>
-          <name>git_url</name>
-          <description></description>
-          <defaultValue></defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>git_branch</name>
-          <description></description>
-          <defaultValue></defaultValue>
-        </hudson.model.StringParameterDefinition>
-      </parameterDefinitions>
-    </hudson.model.ParametersDefinitionProperty>
-  </properties>
+  <properties/>
     ${scm}
-<canRoam>true</canRoam>
+  <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <javaposse.jobdsl.plugin.ExecuteDslScripts plugin="job-dsl@1.60">
-      <targets>**/*.groovy</targets>
+    <javaposse.jobdsl.plugin.ExecuteDslScripts plugin="job-dsl@1.61">
+      <targets>javaProject/gradle/dslTemplates/devops*.groovy</targets>
       <usingScriptText>false</usingScriptText>
       <sandbox>false</sandbox>
       <ignoreExisting>false</ignoreExisting>
