@@ -17,3 +17,13 @@ if (!instance.isUseSecurity()) {
     instance.setAuthorizationStrategy(strategy)
     instance.save()
 }
+
+hudson = new XmlSlurper().parse("/var/lib/jenkins/config.xml")
+def anonymousAccess = hudson.authorizationStrategy.denyAnonymousReadAccess
+
+anonymousAccess.replaceBody 'true'
+def configContent = groovy.xml.XmlUtil.serialize( hudson )
+new File("/var/lib/jenkins/","config.xml").withWriter('utf-8') { 
+	         writer -> writer.write (configContent)
+}
+

@@ -20,6 +20,21 @@
     jenkins_pkg_url: "{{ __jenkins_pkg_url }}"
   when: jenkins_pkg_url is not defined
 
+# set javac path 
+- name: setup link of javac to /etc/alternatives
+  file: 
+    src: /opt/jdk1.8.0_05/bin/javac  
+    dest: /etc/alternatives/javac 
+    state: link
+
+- name: setup javac path 
+  file: 
+    src: /etc/alternatives/javac  
+    dest: /bin/javac 
+    state: link
+
+
+
 # Setup/install tasks.
 - include: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
@@ -59,8 +74,20 @@
     path: "{{ jenkins_home }}/init.groovy.d/created-seed-job.groovy"
     state: absent
 
- Update Jenkins and install configured plugins.
+# Update Jenkins and install configured plugins.
 - include: plugins.yml
+
+# Install external plugin using jpi and hpi files
+- name: copy scriptler plugin
+  copy:
+    src: scriptler-2.7.hpi
+    dest: /var/lib/jenkins/plugins/
+
+- name: copy uno-choice plugin
+  copy:
+    src: uno-choice.jpi 
+    dest: /var/lib/jenkins/plugins/ 
+
 
 - template:
     src: create-seed-job.groovy.j2
@@ -69,3 +96,8 @@
 - template:
     src: hudson.plugins.gradle.Gradle.xml.j2
     dest: /var/lib/jenkins/hudson.plugins.gradle.Gradle.xml
+
+
+- template:
+    src: hudson.plugins.groovy.Groovy.xml.j2
+    dest: /var/lib/jenkins/hudson.plugins.groovy.Groovy.xml
