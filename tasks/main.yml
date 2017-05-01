@@ -109,3 +109,13 @@
   template:
     src: hudson.plugins.groovy.Groovy.xml.j2
     dest: /var/lib/jenkins/hudson.plugins.groovy.Groovy.xml
+
+- name: Creates scrips dir
+  file: 
+   path: /var/lib/jenkins/scripts 
+   state: directory
+
+- name: Copy all scripts into jenkins
+  copy: 
+    src: scripts/
+    dest: /var/lib/jenkins/scripts/ # remote_src=yes directory_mode=yes

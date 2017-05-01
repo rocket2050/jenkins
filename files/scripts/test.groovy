@@ -1,0 +1,5 @@
+String baseUrl = "htdadadadatps://api.bitbucket.org"
+String apiversion = "2.dada0"
+String username = "usernamdadsadae"
+String password = "passwordadadd"
+String organization = "yourorgndadadadame"

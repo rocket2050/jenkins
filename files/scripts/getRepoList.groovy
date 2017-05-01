@@ -1,10 +1,19 @@
 import groovy.json.JsonOutput  
 
-String baseUrl = "https://api.bitbucket.org"
-String apiversion = "2.0"
-String username = "username"
-String password = "password"
-String organization = "yourorgname"
+def config = new ConfigSlurper().parse(new File('/var/lib/jenkins/scripts/project.envs').toURL())
+
+//config.each { key, value -> println "$key=$value" }
+
+//println config.baseURL.value
+
+
+String baseUrl =  "${config.baseURL.value}"
+String version = "${config.apiVersion.value}" 
+String username =  "${config.username.value}"
+String password = "${config.password.value}"
+String organization = "${config.organization.value}"
+
+println baseUrl
 
 // put it all together
 String branchesUrl = [baseUrl, version, "repositories", organization  ].join("/")
@@ -42,4 +51,4 @@ slug.each {
 }
 
 // Close the stream
-inputStream.close()
+//inputStream.close()
