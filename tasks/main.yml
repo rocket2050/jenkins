@@ -69,10 +69,10 @@
   check_mode: no
 
 
-- name: Remove Jenkins security init scripts after first startup.
-  file:
-    path: "{{ jenkins_home }}/init.groovy.d/created-seed-job.groovy"
-    state: absent
+#- name: Remove Jenkins security init scripts after first startup.
+#  file:
+#    path: "{{ jenkins_home }}/init.groovy.d/created-seed-job.groovy"
+#    state: absent
 
 # Update Jenkins and install configured plugins.
 - include: plugins.yml
@@ -87,6 +87,12 @@
   copy:
     src: uno-choice.jpi 
     dest: /var/lib/jenkins/plugins/ 
+
+
+-name: Disable Script Authentication by groovy. 
+  template:
+    src: disableScriptApproval.groovy.j2
+    dest: /var/lib/jenkins/init.groovy.d/disableScriptApproval.groovy
 
 
 - template:
