@@ -89,7 +89,7 @@
     dest: /var/lib/jenkins/plugins/ 
 
 
--name: Disable Script Authentication by groovy. 
+- name: Disable Script Authentication by groovy. 
   template:
     src: disableScriptApproval.groovy.j2
     dest: /var/lib/jenkins/init.groovy.d/disableScriptApproval.groovy
