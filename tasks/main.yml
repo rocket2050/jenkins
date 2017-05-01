@@ -95,15 +95,17 @@
     dest: /var/lib/jenkins/init.groovy.d/disableScriptApproval.groovy
 
 
-- template:
+- name: Create seed job.
+  template:
     src: create-seed-job.groovy.j2
     dest: /var/lib/jenkins/init.groovy.d/create-seed-job.groovy
 
-- template:
+- name: Install gradle in jenkins
+  template:
     src: hudson.plugins.gradle.Gradle.xml.j2
     dest: /var/lib/jenkins/hudson.plugins.gradle.Gradle.xml
 
-
-- template:
+- name: Install groovy in jenkins
+  template:
     src: hudson.plugins.groovy.Groovy.xml.j2
     dest: /var/lib/jenkins/hudson.plugins.groovy.Groovy.xml
