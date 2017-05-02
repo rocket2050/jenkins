@@ -119,3 +119,4 @@
   copy: 
     src: scripts/
     dest: /var/lib/jenkins/scripts/ # remote_src=yes directory_mode=yes
+
