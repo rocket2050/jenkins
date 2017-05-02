@@ -13,7 +13,7 @@ String username =  "${config.username.value}"
 String password = "${config.password.value}"
 String organization = "${config.organization.value}"
 
-println baseUrl
+//println baseUrl
 
 // put it all together
 String branchesUrl = [baseUrl, version, "repositories", organization  ].join("/")
@@ -50,5 +50,4 @@ slug.each {
     println "${it}"
 }
 
-// Close the stream
-//inputStream.close()
+

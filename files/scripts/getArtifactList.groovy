@@ -1,7 +1,12 @@
 import static groovy.io.FileType.FILES
 
-String jenkinshome = "/var/lib/jenkins"
-String artifactbasedir = "BUILDS"
+def config = new ConfigSlurper().parse(new File('/var/lib/jenkins/scripts/project.envs').toURL())
+
+String baseUrl =  "${config.baseURL.value}"
+
+
+String jenkinshome = "${config.jenkinsHome.value}"
+String artifactbasedir = "${config.artifactBaseDir.value}"
 
 
 def files = []
